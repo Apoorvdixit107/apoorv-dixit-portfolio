@@ -129,6 +129,13 @@
       animation: fadeUp 780ms ease-out both;
     }
 
+    .intro-line {
+      margin: 0 0 8px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      font-weight: 700;
+    }
+
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -214,11 +221,62 @@
       color: rgba(255, 255, 255, 0.86);
     }
 
+    .tech-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      margin-top: 22px;
+      max-width: 860px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.96rem;
+      font-weight: 800;
+    }
+
+    .tech-line span:not(:last-child)::after {
+      content: "•";
+      margin-left: 12px;
+      color: #5eead4;
+    }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 34px;
+    }
+
+    .connect-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 9px;
+    }
+
+    .social-icons a {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-size: 0.76rem;
+      font-weight: 950;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .social-icons a:hover {
+      transform: translateY(-3px);
+      background: rgba(94, 234, 212, 0.18);
     }
 
     .button {
@@ -306,12 +364,23 @@
     }
 
     .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       margin: 0;
       color: var(--accent-strong);
       font-size: 0.78rem;
       text-transform: uppercase;
       font-weight: 900;
       letter-spacing: 0.1em;
+    }
+
+    .section-kicker::after {
+      content: "";
+      width: 42px;
+      height: 2px;
+      background: currentColor;
+      opacity: 0.42;
     }
 
     h2 {
@@ -554,6 +623,11 @@
         margin-top: 28px;
       }
 
+      .connect-strip {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .stats,
       .summary,
       .skills,
@@ -591,6 +665,10 @@
         width: 100%;
       }
 
+      .tech-line {
+        gap: 7px 10px;
+      }
+
       .summary-text,
       .credential,
       .skill-card,
@@ -626,8 +704,21 @@
       </nav>
 
       <div class="hero-content">
+        <p class="intro-line">Hello there, I’m</p>
         <p class="eyebrow">Backend Software Engineer</p>
-        <h1>Building resilient <span class="highlight">microservices</span> for high-scale platforms.</h1>
+        <h1>Apoorv Dixit</h1>
+        <p class="lead">
+          Building resilient <span class="highlight">microservices</span> for high-scale inventory platforms.
+        </p>
+        <div class="tech-line" aria-label="Core technology stack">
+          <span>Java 17</span>
+          <span>Spring Boot</span>
+          <span>OAuth2/JWT</span>
+          <span>MySQL</span>
+          <span>Redis</span>
+          <span>AWS</span>
+          <span>Docker</span>
+        </div>
         <p class="lead">
           Results-driven engineer with 3+ years of experience designing low-latency REST APIs,
           event-driven systems, and cloud-native distributed architectures for large-scale
@@ -636,6 +727,15 @@
         <div class="hero-actions">
           <a class="button primary" href="#summary">View Profile</a>
           <a class="button secondary" href="resume.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+        </div>
+        <div class="connect-strip" aria-label="Quick contact links">
+          <span>Let’s connect</span>
+          <div class="social-icons">
+            <a href="https://github.com/Apoorvdixit107" target="_blank" rel="noreferrer" aria-label="GitHub">GH</a>
+            <a href="https://www.linkedin.com/in/apoorvdixit1087/" target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
+            <a href="https://wa.me/918130455129" target="_blank" rel="noreferrer" aria-label="WhatsApp">WA</a>
+            <a href="mailto:apoorv.dixit.developer@gmail.com" aria-label="Email">@</a>
+          </div>
         </div>
       </div>
       <div class="float-notes" aria-hidden="true">
