@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apoorv Dixit | Backend Software Engineer</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5a6675;
+      --line: #dce4ec;
+      --paper: #f7fafc;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --accent-strong: #115e59;
+      --warm: #c76d2f;
+      --cool: #2563eb;
+      --shadow: 0 18px 55px rgba(23, 32, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatNote {
+      0%, 100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    @keyframes shimmer {
+      from {
+        background-position: 0% 50%;
+      }
+
+      to {
+        background-position: 100% 50%;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 40px clamp(22px, 6vw, 82px) 76px;
+      background:
+        linear-gradient(115deg, rgba(10, 24, 34, 0.88), rgba(10, 24, 34, 0.58)),
+        url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1800&q=80") center / cover;
+      color: #ffffff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.9), transparent);
+    }
+
+    .nav {
+      position: absolute;
+      top: 28px;
+      left: clamp(22px, 6vw, 82px);
+      right: clamp(22px, 6vw, 82px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0;
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .hero-content {
+      width: min(930px, 100%);
+      padding-top: 64px;
+      animation: fadeUp 780ms ease-out both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.84);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: #5eead4;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(2.8rem, 8vw, 6.8rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .highlight {
+      background: linear-gradient(90deg, #5eead4, #bfdbfe, #fde68a, #5eead4);
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 7s linear infinite;
+    }
+
+    .float-notes {
+      position: absolute;
+      right: clamp(18px, 5vw, 78px);
+      bottom: clamp(76px, 12vw, 140px);
+      display: grid;
+      gap: 12px;
+      width: min(270px, 34vw);
+      pointer-events: none;
+    }
+
+    .float-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      animation: floatNote 5s ease-in-out infinite;
+    }
+
+    .float-note:nth-child(2) {
+      animation-delay: 700ms;
+    }
+
+    .float-note:nth-child(3) {
+      animation-delay: 1400ms;
+    }
+
+    .float-note span:first-child {
+      font-size: 1.2rem;
+    }
+
+    .float-note span:last-child {
+      font-size: 0.82rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .lead {
+      margin: 26px 0 0;
+      max-width: 780px;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .primary {
+      background: #5eead4;
+      color: #082f2b;
+      border-color: #5eead4;
+    }
+
+    .secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      backdrop-filter: blur(10px);
+    }
+
+    .stats {
+      width: min(1120px, calc(100% - 44px));
+      margin: -52px auto 0;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      animation: fadeUp 700ms 160ms ease-out both;
+    }
+
+    .stat {
+      padding: 28px;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.75rem, 3vw, 2.45rem);
+      line-height: 1;
+      color: var(--accent-strong);
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.93rem;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 44px));
+      margin: 74px auto 90px;
+    }
+
+    .section {
+      margin-top: 72px;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.5fr);
+      gap: 34px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--accent-strong);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .summary-text,
+    .credential {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(24px, 4vw, 38px);
+      animation: fadeUp 700ms ease-out both;
+    }
+
+    .summary-text p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .credential {
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      background: #102a2a;
+      color: #ffffff;
+    }
+
+    .badge {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #f59e0b;
+      color: #111827;
+      font-size: 1.85rem;
+      font-weight: 950;
+      animation: floatNote 4.8s ease-in-out infinite;
+    }
+
+    .credential h3,
+    .skill-card h3,
+    .timeline h3 {
+      margin: 0;
+      font-size: 1.14rem;
+      line-height: 1.25;
+    }
+
+    .credential p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .skill-card {
+      min-height: 230px;
+      padding: 26px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      animation: fadeUp 650ms ease-out both;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 42px rgba(23, 32, 42, 0.12);
+      border-color: rgba(15, 118, 110, 0.42);
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .icon.java {
+      background: var(--warm);
+    }
+
+    .icon.cloud {
+      background: var(--cool);
+    }
+
+    .icon.design {
+      background: var(--accent);
+    }
+
+    .skill-card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #314154;
+      font-weight: 800;
+      font-size: 0.78rem;
+      background: #fbfdff;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .timeline-item {
+      padding: 28px;
+      border-left: 5px solid var(--accent);
+      background: var(--panel);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(23, 32, 42, 0.06);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      animation: fadeUp 650ms ease-out both;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 42px rgba(23, 32, 42, 0.12);
+    }
+
+    .timeline-item:nth-child(2) {
+      border-color: var(--warm);
+    }
+
+    .timeline-item:nth-child(3) {
+      border-color: var(--cool);
+    }
+
+    .timeline-item:nth-child(4) {
+      border-color: #7c3aed;
+    }
+
+    .timeline p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .timeline-item h3,
+    .skill-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .emoji {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      border-radius: 8px;
+      background: #eef8f6;
+      font-size: 1.05rem;
+    }
+
+    .closing {
+      margin-top: 78px;
+      padding: clamp(28px, 5vw, 48px);
+      background: #17202a;
+      color: #ffffff;
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) auto;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .closing h2 {
+      max-width: 720px;
+    }
+
+    .closing p {
+      margin: 14px 0 0;
+      color: rgba(255, 255, 255, 0.74);
+      max-width: 760px;
+    }
+
+    .contact {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .contact a {
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    @media (max-width: 880px) {
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .float-notes {
+        position: static;
+        width: 100%;
+        margin-top: 28px;
+      }
+
+      .stats,
+      .summary,
+      .skills,
+      .timeline,
+      .closing,
+      .section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        margin-top: -34px;
+      }
+
+      .stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stat:last-child {
+        border-bottom: 0;
+      }
+
+      .closing .contact {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        min-height: 88vh;
+        padding-bottom: 64px;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .summary-text,
+      .credential,
+      .skill-card,
+      .timeline-item {
+        padding: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero" id="home">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#home">Apoorv Dixit</a>
+        <div class="nav-links">
+          <a href="#summary">Summary</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#impact">Impact</a>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <p class="eyebrow">Backend Software Engineer</p>
+        <h1>Building resilient <span class="highlight">microservices</span> for high-scale platforms.</h1>
+        <p class="lead">
+          Results-driven engineer with 3+ years of experience designing low-latency REST APIs,
+          event-driven systems, and cloud-native distributed architectures for large-scale
+          inventory management platforms.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#summary">View Profile</a>
+          <a class="button secondary" href="#expertise">Explore Skills</a>
+        </div>
+      </div>
+      <div class="float-notes" aria-hidden="true">
+        <div class="float-note"><span>⚡</span><span>Low-latency APIs</span></div>
+        <div class="float-note"><span>🔐</span><span>Secure OAuth2/JWT systems</span></div>
+        <div class="float-note"><span>☁️</span><span>AWS cloud-native delivery</span></div>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="Professional highlights">
+      <div class="stat">
+        <strong>3+</strong>
+        <span>Years of backend engineering</span>
+      </div>
+      <div class="stat">
+        <strong>40-60%</strong>
+        <span>API latency reduction</span>
+      </div>
+      <div class="stat">
+        <strong>50%</strong>
+        <span>Database load reduction</span>
+      </div>
+      <div class="stat">
+        <strong>99.9%</strong>
+        <span>Service uptime delivered</span>
+      </div>
+    </section>
+
+    <main>
+      <section class="section" id="summary">
+        <div class="section-header">
+          <p class="section-kicker">Professional Summary</p>
+          <h2>Engineering backend systems that stay fast, reliable, and maintainable under real production pressure.</h2>
+        </div>
+        <div class="summary">
+          <article class="summary-text">
+            <p>
+              I am a Backend Software Engineer focused on architecting scalable, high-performance
+              microservices using Java 17, Spring Boot, Spring Security, OAuth2/JWT, MySQL, Redis,
+              and AWS. My work centers on clean service boundaries, secure API design, distributed
+              architecture, and measurable performance improvements across large-scale inventory
+              management platforms.
+            </p>
+          </article>
+          <aside class="credential">
+            <div class="badge">AWS</div>
+            <h3>AWS Certified Developer - Associate</h3>
+            <p>
+              Experienced in cloud-native engineering practices, resilient service design,
+              and deployment-minded backend development.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="expertise">
+        <div class="section-header">
+          <p class="section-kicker">Core Expertise</p>
+          <h2>A practical backend toolkit for secure, distributed, high-throughput products.</h2>
+        </div>
+        <div class="skills">
+          <article class="skill-card">
+            <div>
+              <div class="icon java">J</div>
+              <h3><span class="emoji">☕</span>Java and Spring Engineering</h3>
+              <p>
+                Building production-grade REST APIs and microservices with Java 17,
+                Spring Boot, Spring Security, OAuth2, and JWT.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">Java 17</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Security</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div>
+              <div class="icon cloud">C</div>
+              <h3><span class="emoji">🚀</span>Cloud and Data Performance</h3>
+              <p>
+                Designing cloud-aware services backed by MySQL, Redis, and AWS,
+                with an emphasis on low latency and efficient database usage.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">AWS</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Redis</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <div>
+              <div class="icon design">S</div>
+              <h3><span class="emoji">🧠</span>System Design and Delivery</h3>
+              <p>
+                Applying SOLID principles, TDD, Agile/Scrum delivery, and
+                AI-augmented workflows to ship reliable backend systems.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">TDD</span>
+              <span class="tag">SOLID</span>
+              <span class="tag">Agile</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="impact">
+        <div class="section-header">
+          <p class="section-kicker">Measurable Impact</p>
+          <h2>Focused on outcomes that users, teams, and systems can feel.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <h3><span class="emoji">⚡</span>Reduced API latency by 40-60%</h3>
+            <p>
+              Optimized backend service behavior for faster response times across
+              high-volume application workflows.
+            </p>
+          </article>
+          <article class="timeline-item">
+            <h3><span class="emoji">📉</span>Reduced database load by 50%</h3>
+            <p>
+              Improved data access patterns and caching strategy to lower pressure
+              on relational storage.
+            </p>
+          </article>
+          <article class="timeline-item">
+            <h3><span class="emoji">🛡️</span>Maintained 99.9% service uptime</h3>
+            <p>
+              Designed for operational reliability through resilient architecture,
+              disciplined testing, and production-minded engineering.
+            </p>
+          </article>
+          <article class="timeline-item">
+            <h3><span class="emoji">📡</span>Delivered event-driven services</h3>
+            <p>
+              Built messaging-oriented backend systems for scalable inventory
+              management and distributed workflows.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="closing" aria-label="Contact section">
+        <div>
+          <h2>Backend engineer for teams that care about scale, security, and speed.</h2>
+          <p>
+            Available to contribute to microservices, platform modernization,
+            distributed systems, and cloud-native backend engineering.
+          </p>
+        </div>
+        <div class="contact">
+          <a href="mailto:apoorv.dixit.developer@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/apoorvdixit1087/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/Apoorvdixit107" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
