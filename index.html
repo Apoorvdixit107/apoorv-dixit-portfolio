@@ -19,6 +19,19 @@
       --shadow: 0 18px 55px rgba(23, 32, 42, 0.12);
     }
 
+    :root[data-theme="dark"] {
+      --ink: #ecfeff;
+      --muted: #a8bac7;
+      --line: #23404a;
+      --paper: #061114;
+      --panel: #0d1f24;
+      --accent: #5eead4;
+      --accent-strong: #99f6e4;
+      --warm: #f59e0b;
+      --cool: #60a5fa;
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -65,6 +78,7 @@
       color: var(--ink);
       background: var(--paper);
       line-height: 1.6;
+      transition: background 220ms ease, color 220ms ease;
     }
 
     a {
@@ -118,9 +132,29 @@
 
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 20px;
       font-size: 0.92rem;
       color: rgba(255, 255, 255, 0.82);
+    }
+
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      background: rgba(94, 234, 212, 0.18);
     }
 
     .hero-content {
@@ -515,6 +549,46 @@
       background: #fbfdff;
     }
 
+    :root[data-theme="dark"] .tag {
+      color: #d7fbf6;
+      background: #102a2f;
+    }
+
+    .skill-cloud {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .tech-badge {
+      min-height: 68px;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 0 10px 25px rgba(23, 32, 42, 0.05);
+      font-size: 0.86rem;
+      font-weight: 950;
+      text-align: center;
+      animation: fadeUp 650ms ease-out both, floatNote 6s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 70ms), calc(var(--i) * 140ms);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .tech-badge:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: var(--accent);
+      background: #eef8f6;
+    }
+
+    :root[data-theme="dark"] .tech-badge:hover {
+      background: #12343a;
+    }
+
     .timeline {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -648,6 +722,12 @@
         display: none;
       }
 
+      .theme-toggle {
+        position: absolute;
+        right: 0;
+        top: 40px;
+      }
+
       .float-notes {
         position: static;
         width: 100%;
@@ -662,6 +742,7 @@
       .stats,
       .summary,
       .skills,
+      .skill-cloud,
       .timeline,
       .closing,
       .section-header {
@@ -698,6 +779,10 @@
 
       .tech-line {
         gap: 7px 10px;
+      }
+
+      .skill-cloud {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .summary-text,
@@ -740,6 +825,7 @@
           <a href="#credentials">Credentials</a>
           <a href="#impact">Impact</a>
         </div>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" data-theme-toggle>☾</button>
       </nav>
 
       <div class="hero-content">
@@ -923,6 +1009,20 @@
             </div>
           </article>
         </div>
+        <div class="skill-cloud" aria-label="Technical skills">
+          <span class="tech-badge" style="--i: 1">Java 17</span>
+          <span class="tech-badge" style="--i: 2">Spring Boot</span>
+          <span class="tech-badge" style="--i: 3">Spring Security</span>
+          <span class="tech-badge" style="--i: 4">OAuth2/JWT</span>
+          <span class="tech-badge" style="--i: 5">MySQL</span>
+          <span class="tech-badge" style="--i: 6">PostgreSQL</span>
+          <span class="tech-badge" style="--i: 7">Redis</span>
+          <span class="tech-badge" style="--i: 8">AWS SQS</span>
+          <span class="tech-badge" style="--i: 9">Docker</span>
+          <span class="tech-badge" style="--i: 10">GitHub Actions</span>
+          <span class="tech-badge" style="--i: 11">JUnit 5</span>
+          <span class="tech-badge" style="--i: 12">Grafana</span>
+        </div>
       </section>
 
       <section class="section" id="credentials">
@@ -1031,5 +1131,24 @@
       <span>Chat on WhatsApp</span>
     </a>
   </div>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector("[data-theme-toggle]");
+    const storedTheme = localStorage.getItem("portfolio-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    function setTheme(theme) {
+      root.dataset.theme = theme;
+      toggle.textContent = theme === "dark" ? "☀" : "☾";
+      toggle.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+      localStorage.setItem("portfolio-theme", theme);
+    }
+
+    setTheme(storedTheme || (prefersDark ? "dark" : "light"));
+
+    toggle.addEventListener("click", () => {
+      setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+    });
+  </script>
 </body>
 </html>
