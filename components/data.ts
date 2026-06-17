@@ -1,6 +1,14 @@
 export type Stat = { value: string; label: string };
 export type Card = { icon: string; title: string; body: string };
 export type SkillCard = Card & { marker: string; tags: string[] };
+export type Project = {
+  icon: string;
+  name: string;
+  description: string;
+  siteUrl: string;
+  githubUrl: string;
+  tags: string[];
+};
 
 export const stats: Stat[] = [
   { value: "3+", label: "Years of backend engineering" },
@@ -91,6 +99,18 @@ export const credentials: Card[] = [
     icon: "🤖",
     title: "AI-Augmented Engineering",
     body: "Uses OpenAI, Gemini, Claude APIs, and Cursor AI to accelerate delivery while keeping code quality, review, and system design discipline at the center."
+  }
+];
+
+export const projects: Project[] = [
+  {
+    icon: "💰",
+    name: "EMS — Expense Management System",
+    description:
+      "Event-driven microservices platform for personal expense tracking. Built with Spring Boot API Gateway, JWT authentication, Kafka event streaming, and a Next.js dashboard for expenses, reports, and real-time notifications.",
+    siteUrl: "https://expensekit.netlify.app",
+    githubUrl: "https://github.com/Apoorvdixit107/ExpenseManagementSystem",
+    tags: ["Java 17", "Spring Boot", "Kafka", "Next.js", "Docker", "MySQL"]
   }
 ];
 

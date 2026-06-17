@@ -1,13 +1,15 @@
 import { BackToTop } from "@/components/BackToTop";
+import { ContactActions } from "@/components/ContactActions";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WhatsAppChat } from "@/components/WhatsAppChat";
-import { credentials, experience, impact, skills, stats, techBadges } from "@/components/data";
+import { credentials, experience, impact, projects, skills, stats, techBadges } from "@/components/data";
 import type { ReactNode } from "react";
 
 const navItems = [
   { href: "#summary", label: "Summary" },
   { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
   { href: "#expertise", label: "Expertise" },
   { href: "#credentials", label: "Credentials" },
   { href: "#impact", label: "Impact" }
@@ -46,6 +48,55 @@ function linkStockRegister(text: string) {
     if (index < parts.length - 1) nodes.push(<StockRegisterLink key={`stock-register-${index}`} />);
     return nodes;
   });
+}
+
+function ProjectGrid() {
+  return (
+    <div className="grid gap-5 md:grid-cols-2">
+      {projects.map((project) => (
+        <article
+          key={project.name}
+          className="animate-fade-up flex flex-col rounded-lg border-l-4 border-teal-700 bg-white p-7 shadow-[0_10px_30px_rgba(23,32,42,0.06)] transition hover:-translate-y-1 hover:shadow-soft dark:border-teal-300 dark:bg-[#0d1f24]"
+        >
+          <h3 className="flex items-center gap-3 text-lg font-black text-slate-900 dark:text-cyan-50">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-teal-50 text-base dark:bg-[#12343a]">
+              {project.icon}
+            </span>
+            {project.name}
+          </h3>
+          <p className="mt-3 flex-1 text-slate-600 dark:text-slate-300">{project.description}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-black text-slate-700 dark:border-slate-700 dark:bg-[#102a2f] dark:text-cyan-50"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a
+              href={project.siteUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-10 items-center justify-center rounded-lg border border-teal-700 bg-teal-700 px-4 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-teal-600 dark:border-teal-300 dark:bg-teal-300 dark:text-teal-950 dark:hover:bg-teal-200"
+            >
+              Live Site
+            </a>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-10 items-center justify-center rounded-lg border border-slate-200 px-4 text-sm font-black text-slate-700 transition hover:-translate-y-0.5 hover:border-teal-700 hover:text-teal-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-teal-300 dark:hover:text-teal-200"
+            >
+              GitHub
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
 }
 
 function CardGrid({ items }: { items: typeof experience }) {
@@ -135,7 +186,7 @@ export default function Home() {
               Download Resume
             </a>
             <a
-              href="#experience"
+              href="#projects"
               className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/30 px-5 font-black text-white transition hover:-translate-y-0.5"
             >
               View Work
@@ -221,6 +272,14 @@ export default function Home() {
           <CardGrid items={experience} />
         </section>
 
+        <section id="projects">
+          <SectionHeader
+            kicker="Projects"
+            title="Full-stack backend systems built end to end — from microservices and APIs to live deployments."
+          />
+          <ProjectGrid />
+        </section>
+
         <section id="expertise">
           <SectionHeader kicker="Core Expertise" title="A practical backend toolkit for secure, distributed, high-throughput products." />
           <div className="grid gap-5 lg:grid-cols-3">
@@ -298,25 +357,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex flex-wrap content-start gap-2 md:justify-end">
-            <a
-              className="rounded-lg border border-teal-300 bg-teal-300 px-4 py-3 font-black text-teal-950"
-              href="https://wa.me/918130455129?text=Hi%20Apoorv%2C%20I%20want%20to%20discuss%20backend%20development%20services."
-              target="_blank"
-              rel="noreferrer"
-            >
-              Discuss Project
-            </a>
-            <a className="rounded-lg border border-white/20 px-4 py-3 font-black" href="tel:+918130455129">
-              +91 8130455129
-            </a>
-            <a className="rounded-lg border border-white/20 px-4 py-3 font-black" href="mailto:apoorv.dixit.developer@gmail.com">
-              Email
-            </a>
-            <a className="rounded-lg border border-white/20 px-4 py-3 font-black" href={asset("/resume.pdf")} target="_blank" rel="noreferrer">
-              Resume
-            </a>
-          </div>
+          <ContactActions resumeHref={asset("/resume.pdf")} />
         </section>
       </div>
 

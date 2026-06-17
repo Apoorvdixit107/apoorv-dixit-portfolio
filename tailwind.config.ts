@@ -19,9 +19,14 @@ const config: Config = {
       animation: {
         "fade-up": "fadeUp 700ms ease-out both",
         "float-note": "floatNote 5s ease-in-out infinite",
-        shimmer: "shimmer 7s linear infinite"
+        shimmer: "shimmer 7s linear infinite",
+        "toast-in": "toastIn 280ms ease-out both"
       },
       keyframes: {
+        toastIn: {
+          from: { opacity: "0", transform: "translateX(16px)" },
+          to: { opacity: "1", transform: "translateX(0)" }
+        },
         fadeUp: {
           from: { opacity: "0", transform: "translateY(24px)" },
           to: { opacity: "1", transform: "translateY(0)" }
