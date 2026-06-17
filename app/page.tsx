@@ -3,6 +3,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WhatsAppChat } from "@/components/WhatsAppChat";
 import { credentials, experience, impact, skills, stats, techBadges } from "@/components/data";
+import type { ReactNode } from "react";
 
 const navItems = [
   { href: "#summary", label: "Summary" },
@@ -21,6 +22,31 @@ const socialLinks = [
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const asset = (path: string) => `${basePath}${path}`;
+const STOCK_REGISTER_URL = "https://www.stockregister.in/";
+
+function StockRegisterLink() {
+  return (
+    <a
+      href={STOCK_REGISTER_URL}
+      target="_blank"
+      rel="noreferrer"
+      className="text-teal-700 underline decoration-teal-700/40 underline-offset-2 transition hover:text-teal-600 dark:text-teal-300 dark:hover:text-teal-200"
+    >
+      StockRegister
+    </a>
+  );
+}
+
+function linkStockRegister(text: string) {
+  const parts = text.split("StockRegister");
+  if (parts.length === 1) return text;
+
+  return parts.flatMap((part, index) => {
+    const nodes: ReactNode[] = [part];
+    if (index < parts.length - 1) nodes.push(<StockRegisterLink key={`stock-register-${index}`} />);
+    return nodes;
+  });
+}
 
 function CardGrid({ items }: { items: typeof experience }) {
   return (
@@ -36,7 +62,7 @@ function CardGrid({ items }: { items: typeof experience }) {
             </span>
             {item.title}
           </h3>
-          <p className="mt-3 text-slate-600 dark:text-slate-300">{item.body}</p>
+          <p className="mt-3 text-slate-600 dark:text-slate-300">{linkStockRegister(item.body)}</p>
         </article>
       ))}
     </div>
@@ -184,7 +210,14 @@ export default function Home() {
         </section>
 
         <section id="experience">
-          <SectionHeader kicker="Experience" title="Backend Software Engineer at RipeTech Solutions, building StockRegister for real production scale." />
+          <SectionHeader
+            kicker="Experience"
+            title={
+              <>
+                Backend Software Engineer at RipeTech Solutions, building <StockRegisterLink /> for real production scale.
+              </>
+            }
+          />
           <CardGrid items={experience} />
         </section>
 
