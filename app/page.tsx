@@ -1,7 +1,8 @@
 import { BackToTop } from "@/components/BackToTop";
 import { ContactActions } from "@/components/ContactActions";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import { SectionHeader } from "@/components/SectionHeader";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { SiteNav } from "@/components/SiteNav";
 import { WhatsAppChat } from "@/components/WhatsAppChat";
 import { credentials, experience, impact, projects, skills, stats, techBadges } from "@/components/data";
 import type { ReactNode } from "react";
@@ -16,7 +17,7 @@ const navItems = [
 ];
 
 const socialLinks = [
-  { href: "https://github.com/Apoorvdixit107", label: "GitHub", text: "GH" },
+  { href: "https://github.com/Apoorvdixit107/apoorv-dixit-portfolio", label: "GitHub", text: "GH" },
   { href: "https://www.linkedin.com/in/apoorvdixit1087/", label: "LinkedIn", text: "in" },
   { href: "https://wa.me/918130455129", label: "WhatsApp", text: "WA" },
   { href: "mailto:apoorv.dixit.developer@gmail.com", label: "Email", text: "@" }
@@ -75,12 +76,12 @@ function ProjectGrid() {
               </span>
             ))}
           </div>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href={project.siteUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-10 items-center justify-center rounded-lg border border-teal-700 bg-teal-700 px-4 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-teal-600 dark:border-teal-300 dark:bg-teal-300 dark:text-teal-950 dark:hover:bg-teal-200"
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-lg border border-teal-700 bg-teal-700 px-4 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-teal-600 dark:border-teal-300 dark:bg-teal-300 dark:text-teal-950 dark:hover:bg-teal-200 sm:w-auto"
             >
               Live Site
             </a>
@@ -88,7 +89,7 @@ function ProjectGrid() {
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-10 items-center justify-center rounded-lg border border-slate-200 px-4 text-sm font-black text-slate-700 transition hover:-translate-y-0.5 hover:border-teal-700 hover:text-teal-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-teal-300 dark:hover:text-teal-200"
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-lg border border-slate-200 px-4 text-sm font-black text-slate-700 transition hover:-translate-y-0.5 hover:border-teal-700 hover:text-teal-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-teal-300 dark:hover:text-teal-200 sm:w-auto"
             >
               GitHub
             </a>
@@ -125,39 +126,25 @@ export default function Home() {
     <main className="min-h-screen overflow-x-clip">
       <header
         id="home"
-        className="hero-bg relative grid min-h-[92vh] items-start px-6 pb-20 pt-10 text-white md:px-[6vw]"
+        className="hero-bg relative grid min-h-[88vh] items-start px-4 pb-16 pt-8 text-white sm:min-h-[92vh] sm:px-6 sm:pb-20 sm:pt-10 md:px-[6vw]"
         style={{
           backgroundImage: `linear-gradient(115deg, rgba(5, 13, 18, 0.9), rgba(5, 13, 18, 0.54)), url("${asset("/hero-vector.svg")}")`
         }}
       >
-        <nav className="absolute left-6 right-6 top-7 z-30 flex items-center justify-between gap-5 md:left-[6vw] md:right-[6vw]">
-          <a href="#home" className="relative z-30 text-base font-extrabold">
-            Apoorv Dixit
-          </a>
-          <div className="relative z-30 flex max-w-[min(72vw,42rem)] items-center gap-4 overflow-x-auto text-sm font-semibold text-white/80 [-ms-overflow-style:none] [scrollbar-width:none] md:max-w-none md:gap-5 [&::-webkit-scrollbar]:hidden">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="shrink-0 transition hover:text-teal-200">
-                {item.label}
-              </a>
-            ))}
-          </div>
-          <div className="relative z-30 shrink-0">
-            <ThemeToggle />
-          </div>
-        </nav>
+        <SiteNav items={navItems} />
 
-        <section className="pointer-events-none relative z-10 w-full max-w-4xl animate-fade-up pb-8 pt-28 md:pt-32 [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
-          <p className="mb-2 text-lg font-bold text-white/80">Hello there, I&apos;m</p>
-          <p className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.08em] text-white/85 before:h-0.5 before:w-9 before:bg-teal-300">
+        <section className="pointer-events-none relative z-10 w-full max-w-4xl animate-fade-up pb-6 pt-24 sm:pb-8 sm:pt-28 md:pt-32 [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
+          <p className="mb-2 text-base font-bold text-white/80 sm:text-lg">Hello there, I&apos;m</p>
+          <p className="mb-4 inline-flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-white/85 before:h-0.5 before:w-9 before:bg-teal-300 sm:text-xs">
             Backend Software Engineer
           </p>
-          <h1 className="text-6xl font-black leading-none tracking-normal md:text-8xl">Apoorv Dixit</h1>
-          <p className="mt-7 max-w-3xl text-xl text-white/85 md:text-2xl">
+          <h1 className="text-4xl font-black leading-none tracking-normal sm:text-5xl md:text-6xl lg:text-8xl">Apoorv Dixit</h1>
+          <p className="mt-5 max-w-3xl text-lg text-white/85 sm:mt-7 sm:text-xl md:text-2xl">
             Building resilient <span className="highlight-text animate-shimmer">microservices</span> for high-scale inventory
             platforms.
           </p>
 
-          <div className="mt-6 flex max-w-4xl flex-wrap gap-x-3 gap-y-2 text-sm font-extrabold text-white/85 md:text-base">
+          <div className="mt-6 flex max-w-4xl flex-wrap gap-x-2 gap-y-2 text-xs font-extrabold text-white/85 sm:gap-x-3 sm:text-sm md:text-base">
             {["Java 17", "Spring Boot", "OAuth2/JWT", "MySQL", "Redis", "AWS", "Docker"].map((tech, index) => (
               <span key={tech} className={index === 6 ? "" : "after:ml-3 after:text-teal-300 after:content-['•']"}>
                 {tech}
@@ -165,17 +152,17 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="mt-6 max-w-3xl text-lg text-white/85">
+          <p className="mt-5 max-w-3xl text-base text-white/85 sm:mt-6 sm:text-lg">
             Results-driven engineer with 3+ years of experience designing low-latency REST APIs, event-driven systems, and
             cloud-native distributed architectures for large-scale inventory management platforms.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
             <a
               href="https://wa.me/918130455129?text=Hi%20Apoorv%2C%20I%20visited%20your%20portfolio%20and%20want%20to%20discuss%20a%20backend%20development%20project."
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-teal-300 bg-teal-300 px-5 font-black text-teal-950 transition hover:-translate-y-0.5"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-lg border border-teal-300 bg-teal-300 px-5 font-black text-teal-950 transition hover:-translate-y-0.5 sm:w-auto"
             >
               Hire Me
             </a>
@@ -183,13 +170,13 @@ export default function Home() {
               href={asset("/resume.pdf")}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/30 bg-white/10 px-5 font-black text-white backdrop-blur transition hover:-translate-y-0.5"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-lg border border-white/30 bg-white/10 px-5 font-black text-white backdrop-blur transition hover:-translate-y-0.5 sm:w-auto"
             >
               Download Resume
             </a>
             <a
               href="#projects"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/30 px-5 font-black text-white transition hover:-translate-y-0.5"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-lg border border-white/30 px-5 font-black text-white transition hover:-translate-y-0.5 sm:w-auto"
             >
               View Work
             </a>
@@ -230,16 +217,16 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="pointer-events-none relative z-10 mx-auto -mt-12 grid w-[min(1120px,calc(100%-44px))] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft dark:border-slate-700 dark:bg-[#0d1f24] md:grid-cols-4">
+      <section className="pointer-events-none relative z-10 mx-auto -mt-8 grid w-[min(1120px,calc(100%-2rem))] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft dark:border-slate-700 dark:bg-[#0d1f24] sm:-mt-12 sm:w-[min(1120px,calc(100%-44px))] md:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="border-b border-slate-200 p-7 last:border-b-0 dark:border-slate-700 md:border-b-0 md:border-r md:last:border-r-0">
-            <strong className="block text-3xl font-black leading-none text-teal-800 dark:text-teal-200">{stat.value}</strong>
+          <div key={stat.label} className="border-b border-slate-200 p-5 last:border-b-0 dark:border-slate-700 sm:p-7 md:border-b-0 md:border-r md:last:border-r-0">
+            <strong className="block text-2xl font-black leading-none text-teal-800 dark:text-teal-200 sm:text-3xl">{stat.value}</strong>
             <span className="mt-2 block text-sm font-bold text-slate-600 dark:text-slate-300">{stat.label}</span>
           </div>
         ))}
       </section>
 
-      <div className="mx-auto my-20 w-[min(1120px,calc(100%-44px))] space-y-20">
+      <div className="mx-auto my-12 w-[min(1120px,calc(100%-2rem))] space-y-12 sm:my-20 sm:w-[min(1120px,calc(100%-44px))] sm:space-y-20">
         <section id="summary" className="scroll-mt-28">
           <SectionHeader
             kicker="Professional Summary"
@@ -331,9 +318,9 @@ export default function Home() {
           <CardGrid items={impact} />
         </section>
 
-        <section className="grid gap-7 rounded-lg bg-slate-900 p-8 text-white md:grid-cols-[minmax(0,1.5fr)_auto] md:p-12">
+        <section className="grid gap-7 rounded-lg bg-slate-900 p-6 text-white sm:p-8 md:grid-cols-[minmax(0,1.5fr)_auto] md:p-12">
           <div>
-            <h2 className="max-w-3xl text-3xl font-black leading-tight md:text-4xl">Have a backend problem that needs speed, scale, or cleaner architecture?</h2>
+            <h2 className="max-w-3xl text-2xl font-black leading-tight sm:text-3xl md:text-4xl">Have a backend problem that needs speed, scale, or cleaner architecture?</h2>
             <p className="mt-4 max-w-3xl text-white/75">
               I can help with Java/Spring Boot APIs, microservices, Redis caching, secure authentication, AWS deployment,
               CI/CD, and production reliability.
@@ -363,6 +350,7 @@ export default function Home() {
         </section>
       </div>
 
+      <InstallPrompt />
       <WhatsAppChat />
       <BackToTop />
     </main>

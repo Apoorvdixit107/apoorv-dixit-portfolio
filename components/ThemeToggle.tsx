@@ -10,7 +10,9 @@ export function ThemeToggle() {
   useEffect(() => {
     const stored = window.localStorage.getItem("portfolio-theme") as Theme | null;
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(stored || (prefersDark ? "dark" : "light"));
+    const initial = stored === "dark" || stored === "light" ? stored : prefersDark ? "dark" : "light";
+    document.documentElement.dataset.theme = initial;
+    setThemeState(initial);
   }, []);
 
   function setTheme(nextTheme: Theme) {

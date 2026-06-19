@@ -1,9 +1,21 @@
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { ThemeScript } from "@/components/ThemeScript";
 import { ToastProvider } from "@/components/toast";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const siteUrl = "https://apoorvdixit107.github.io/apoorv-dixit-portfolio/";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#0f766e" },
+    { media: "(prefers-color-scheme: dark)", color: "#061114" }
+  ]
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -13,6 +25,12 @@ export const metadata: Metadata = {
   authors: [{ name: "Apoorv Dixit" }],
   robots: { index: true, follow: true },
   alternates: { canonical: siteUrl },
+  manifest: `${basePath}/manifest.webmanifest`,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Apoorv Dixit"
+  },
   openGraph: {
     type: "website",
     url: siteUrl,
@@ -35,15 +53,22 @@ export const metadata: Metadata = {
     images: ["/og-image.png"]
   },
   icons: {
-    icon: "/favicon.svg"
+    icon: `${basePath}/favicon.svg`,
+    apple: `${basePath}/icons/icon-192.png`
   }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>
-        <ToastProvider>{children}</ToastProvider>
+        <ToastProvider>
+          {children}
+          <ServiceWorkerRegister />
+        </ToastProvider>
       </body>
     </html>
   );
