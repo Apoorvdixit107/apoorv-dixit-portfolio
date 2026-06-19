@@ -122,29 +122,31 @@ function CardGrid({ items }: { items: typeof experience }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden">
+    <main className="min-h-screen overflow-x-clip">
       <header
         id="home"
-        className="hero-bg relative grid min-h-[92vh] items-center px-6 pb-20 pt-10 text-white md:px-[6vw]"
+        className="hero-bg relative grid min-h-[92vh] items-start px-6 pb-20 pt-10 text-white md:px-[6vw]"
         style={{
           backgroundImage: `linear-gradient(115deg, rgba(5, 13, 18, 0.9), rgba(5, 13, 18, 0.54)), url("${asset("/hero-vector.svg")}")`
         }}
       >
-        <nav className="absolute left-6 right-6 top-7 flex items-center justify-between gap-5 md:left-[6vw] md:right-[6vw]">
-          <a href="#home" className="text-base font-extrabold">
+        <nav className="absolute left-6 right-6 top-7 z-30 flex items-center justify-between gap-5 md:left-[6vw] md:right-[6vw]">
+          <a href="#home" className="relative z-30 text-base font-extrabold">
             Apoorv Dixit
           </a>
-          <div className="hidden items-center gap-5 text-sm font-semibold text-white/80 md:flex">
+          <div className="relative z-30 flex max-w-[min(72vw,42rem)] items-center gap-4 overflow-x-auto text-sm font-semibold text-white/80 [-ms-overflow-style:none] [scrollbar-width:none] md:max-w-none md:gap-5 [&::-webkit-scrollbar]:hidden">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="transition hover:text-teal-200">
+              <a key={item.href} href={item.href} className="shrink-0 transition hover:text-teal-200">
                 {item.label}
               </a>
             ))}
           </div>
-          <ThemeToggle />
+          <div className="relative z-30 shrink-0">
+            <ThemeToggle />
+          </div>
         </nav>
 
-        <section className="w-full max-w-4xl animate-fade-up pt-16">
+        <section className="pointer-events-none relative z-10 w-full max-w-4xl animate-fade-up pb-8 pt-28 md:pt-32 [&_a]:pointer-events-auto [&_button]:pointer-events-auto">
           <p className="mb-2 text-lg font-bold text-white/80">Hello there, I&apos;m</p>
           <p className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.08em] text-white/85 before:h-0.5 before:w-9 before:bg-teal-300">
             Backend Software Engineer
@@ -228,7 +230,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto -mt-12 grid w-[min(1120px,calc(100%-44px))] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft dark:border-slate-700 dark:bg-[#0d1f24] md:grid-cols-4">
+      <section className="pointer-events-none relative z-10 mx-auto -mt-12 grid w-[min(1120px,calc(100%-44px))] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-soft dark:border-slate-700 dark:bg-[#0d1f24] md:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="border-b border-slate-200 p-7 last:border-b-0 dark:border-slate-700 md:border-b-0 md:border-r md:last:border-r-0">
             <strong className="block text-3xl font-black leading-none text-teal-800 dark:text-teal-200">{stat.value}</strong>
@@ -238,7 +240,7 @@ export default function Home() {
       </section>
 
       <div className="mx-auto my-20 w-[min(1120px,calc(100%-44px))] space-y-20">
-        <section id="summary">
+        <section id="summary" className="scroll-mt-28">
           <SectionHeader
             kicker="Professional Summary"
             title="Engineering backend systems that stay fast, reliable, and maintainable under real production pressure."
@@ -260,7 +262,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience">
+        <section id="experience" className="scroll-mt-28">
           <SectionHeader
             kicker="Experience"
             title={
@@ -272,7 +274,7 @@ export default function Home() {
           <CardGrid items={experience} />
         </section>
 
-        <section id="projects">
+        <section id="projects" className="scroll-mt-28">
           <SectionHeader
             kicker="Projects"
             title="Full-stack backend systems built end to end — from microservices and APIs to live deployments."
@@ -280,7 +282,7 @@ export default function Home() {
           <ProjectGrid />
         </section>
 
-        <section id="expertise">
+        <section id="expertise" className="scroll-mt-28">
           <SectionHeader kicker="Core Expertise" title="A practical backend toolkit for secure, distributed, high-throughput products." />
           <div className="grid gap-5 lg:grid-cols-3">
             {skills.map((skill) => (
@@ -319,12 +321,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="credentials">
+        <section id="credentials" className="scroll-mt-28">
           <SectionHeader kicker="Credentials" title="Certified, cloud-focused, and trained in computer science fundamentals." />
           <CardGrid items={credentials} />
         </section>
 
-        <section id="impact">
+        <section id="impact" className="scroll-mt-28">
           <SectionHeader kicker="Measurable Impact" title="Focused on outcomes that users, teams, and systems can feel." />
           <CardGrid items={impact} />
         </section>

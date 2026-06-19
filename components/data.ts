@@ -108,7 +108,7 @@ export const projects: Project[] = [
     name: "EMS — Expense Management System",
     description:
       "Event-driven microservices platform for personal expense tracking. Built with Spring Boot API Gateway, JWT authentication, Kafka event streaming, and a Next.js dashboard for expenses, reports, and real-time notifications.",
-    siteUrl: "https://expensekit.netlify.app",
+    siteUrl: "https://expensekit17.netlify.app/",
     githubUrl: "https://github.com/Apoorvdixit107/ExpenseManagementSystem",
     tags: ["Java 17", "Spring Boot", "Kafka", "Next.js", "Docker", "MySQL"]
   }
